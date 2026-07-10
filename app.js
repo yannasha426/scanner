@@ -18,6 +18,10 @@ let currentFacingMode = "environment";
 let lastValue = "";
 const canvasContext = canvas.getContext("2d", { willReadFrequently: true });
 
+function syncPreviewOrientation() {
+  video.classList.toggle("is-mirrored", currentFacingMode === "user");
+}
+
 const text = {
   copied: "\u7ed3\u679c\u5df2\u590d\u5236",
   detectorNeedsNetwork: "\u5f53\u524d\u6d4f\u89c8\u5668\u9700\u8981\u8054\u7f51\u52a0\u8f7d\u626b\u7801\u7ec4\u4ef6\uff0c\u6216\u4f7f\u7528\u6700\u65b0\u7248 Chrome/Edge\u3002",
@@ -152,6 +156,7 @@ async function startScanner() {
   try {
     startButton.disabled = true;
     setStatus(text.requestCamera);
+    syncPreviewOrientation();
 
     detector ??= await createDetector();
     stopScanner();
@@ -181,6 +186,7 @@ async function startScanner() {
 
 async function toggleCamera() {
   currentFacingMode = currentFacingMode === "environment" ? "user" : "environment";
+  syncPreviewOrientation();
   if (stream) await startScanner();
 }
 
@@ -242,3 +248,5 @@ if (!window.isSecureContext) {
 } else if (!navigator.mediaDevices?.getUserMedia) {
   setStatus(text.noCameraApi, true);
 }
+
+syncPreviewOrientation();
