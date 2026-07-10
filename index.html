@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>&#25195;&#19968;&#25195;</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="scanner-shell">
+      <section class="scan-stage" aria-label="&#20108;&#32500;&#30721;&#25195;&#25551;&#22120;">
+        <div class="topbar">
+          <div>
+            <p class="eyebrow">QR Scanner</p>
+            <h1>&#25195;&#19968;&#25195;</h1>
+          </div>
+          <button class="icon-button" id="cameraToggle" type="button" aria-label="&#20999;&#25442;&#25668;&#20687;&#22836;" title="&#20999;&#25442;&#25668;&#20687;&#22836;">
+            <span aria-hidden="true">&#8635;</span>
+          </button>
+        </div>
+
+        <div class="viewport-wrap">
+          <video id="preview" class="preview" autoplay muted playsinline></video>
+          <canvas id="frameCanvas" class="hidden"></canvas>
+          <div class="scan-frame" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <p class="status-pill" id="status">&#31561;&#24453;&#25668;&#20687;&#22836;&#26435;&#38480;</p>
+        </div>
+
+        <div class="controls">
+          <button class="primary-button" id="startButton" type="button">&#24320;&#22987;&#25195;&#25551;</button>
+          <button class="secondary-button" id="stopButton" type="button" disabled>&#20572;&#27490;</button>
+          <label class="secondary-button file-button" for="imageInput">&#19978;&#20256;&#22270;&#29255;</label>
+          <input id="imageInput" class="file-input" type="file" accept="image/*" />
+        </div>
+      </section>
+
+      <aside class="result-panel" aria-label="&#25195;&#25551;&#32467;&#26524;">
+        <div class="result-header">
+          <p class="eyebrow">Result</p>
+          <h2>&#25195;&#25551;&#32467;&#26524;</h2>
+        </div>
+
+        <div class="empty-state" id="emptyState">
+          <div class="empty-mark" aria-hidden="true"></div>
+          <p>&#25226;&#20108;&#32500;&#30721;&#25918;&#20837;&#21462;&#26223;&#26694;&#65292;&#25110;&#19978;&#20256;&#20108;&#32500;&#30721;&#22270;&#29255;</p>
+        </div>
+
+        <div class="result-card hidden" id="resultCard">
+          <label for="resultText">&#20869;&#23481;</label>
+          <textarea id="resultText" readonly></textarea>
+          <div class="result-actions">
+            <button class="secondary-button" id="copyButton" type="button">&#22797;&#21046;</button>
+            <a class="primary-button hidden" id="openLink" href="#" target="_blank" rel="noreferrer">&#25171;&#24320;&#38142;&#25509;</a>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
